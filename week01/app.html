@@ -19,9 +19,13 @@
         }
 
         async load(url){
-          fetch(url).then
+          fetch(url).then(response => {
+            return response.json();
+          }).then(json => {
+            this._render();
+          });
         }
-        render() {
+        _render() {
 
         }
       };
