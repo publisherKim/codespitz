@@ -44,6 +44,14 @@
           const caption = document.querySelector('caption');
           caption.innerHTML = fields.title;
           // header를 thdead로
+          table.appendChild(
+            fields.header.reduce((thead, data) => {
+              const th = document.createElement('th');
+              th.innerHTML = data;
+              thead.appendChild(th);
+              return thead;
+            }, document.createElement('thead'))
+          );
           // items를 tr로
           // 부모에 table 삽입
         }

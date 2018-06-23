@@ -96,4 +96,13 @@
   runtime error: 수정불가 throw 처리가 최고
   context error: 모든 프로그램이 동작하나 처리결과를 알수가 없음
   ex) 월급이 50프로가 입금이 됨.
+
+  + load의 정책과 render의 정책이 다름
+  데이터 정책의 두군데의 문제점
+
+  + table 생성, 캡션을 title로
+
+  + reduce helper
+  es6 이후 도우미 함수들이 많아져서
+  for logic 등을 쓸일이 매우 적어졌다.
 */
