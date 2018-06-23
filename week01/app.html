@@ -19,6 +19,7 @@
         }
 
         async load(url){
+          // const response = await init();
           const response = await fetch(url);
           if(!response.ok) throw "invalid response";
           const json = await response.json();
@@ -27,22 +28,24 @@
           Object.assign(this[Private], {title, header, items});
           this._render();
         }
+
         _render() {
           // 의사 코드 작성하기
           // 부모, 데이터 체크
           const fields = this[Private], parent = document.querySelector(fields.parent);
           if (!parent) throw "invalid parent";
-          if (fields.items || !fields.items.length) {
+          if (!fields.items || !fields.items.length) {
             parent.innerHTML = "no data";
             return;
           } else {
             parent.innerHTML = "";
           }
           // table생성
-          const table = document.querySelector('table');
+          const table = document.createElement('table');
           // 캡션을 title로
-          const caption = document.querySelector('caption');
+          const caption = document.createElement('caption');
           caption.innerHTML = fields.title;
+          table.appendChild(caption);
           // header를 thdead로
           table.appendChild(
             fields.header.reduce((thead, data) => {
@@ -54,6 +57,19 @@
           );
           // items를 tr로
           // 부모에 table 삽입
+          parent.appendChild(
+            fields.items.reduce( (table, row)=> {
+              table.appendChild(
+                row.reduce( (tr, data)=> {
+                  const td = document.createElement('td');
+                  td.innerHTML = data;
+                  tr.appendChild(td);
+                  return tr;
+                }, document.createElement('tr'))
+              );
+              return table;
+            }, table)
+          );
         }
       };
     })();
