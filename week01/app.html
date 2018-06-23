@@ -19,11 +19,9 @@
         }
 
         async load(url){
-          fetch(url).then(response => {
-            return response.json();
-          }).then(json => {
-            this._render();
-          });
+          const response = await fetch(url);
+          const json = await response.json();
+          this._render();
         }
         _render() {
 
