@@ -14,11 +14,12 @@
 
       return class {
         constructor(parent){
-
+          if(typeof parent != 'string' || !parent) throw "invalid param";
+          this[Private] = {parent};
         }
-        
+
         async load(url){
-          
+          fetch(url).then
         }
         render() {
 
