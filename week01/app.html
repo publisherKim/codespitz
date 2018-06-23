@@ -20,7 +20,11 @@
 
         async load(url){
           const response = await fetch(url);
+          if(!response.ok) throw "invalid response";
           const json = await response.json();
+          const {title, header, items} = json;
+          if(!items.length) throw "no items";
+          Object.assign(this[Private], {title, header, items});
           this._render();
         }
         _render() {
