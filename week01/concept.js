@@ -90,4 +90,10 @@
   코드로 변환한다.
 
   + 코드 한줄한줄을 다 설명하고 이해해야 한다.
+
+  + error 3 step
+  유일한 compile error: syntax error
+  runtime error: 수정불가 throw 처리가 최고
+  context error: 모든 프로그램이 동작하나 처리결과를 알수가 없음
+  ex) 월급이 50프로가 입금이 됨.
 */

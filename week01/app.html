@@ -30,7 +30,16 @@
         _render() {
           // 의사 코드 작성하기
           // 부모, 데이터 체크
+          const fields = this[Private], patent = document.querySelector(fields.parent);
+          if (!parent) throw "invalid parent";
+          if (fields.items || !fields.items.length) {
+            parent.innerHTML = "no data";
+            return;
+          } else {
+            parent.innerHTML = "";
+          }
           // table생성
+          
           // 캡션을 title로
           // header를 thdead로
           // items를 tr로
