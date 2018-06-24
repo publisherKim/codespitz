@@ -8,73 +8,12 @@
 </head>
 <body>
   <section id="data"></section>
+  <script src="load.js"></script>
+  <script src="renderer.js"></script>
   <script>
-    const Table =( _ => {
-      const Private = Symbol();
-
-      return class {
-        constructor(parent){
-          if(typeof parent != 'string' || !parent) throw "invalid param";
-          this[Private] = {parent};
-        }
-
-        async load(url){
-          // const response = await init();
-          const response = await fetch(url);
-          if(!response.ok) throw "invalid response";
-          const json = await response.json();
-          const {title, header, items} = json;
-          if(!items.length) throw "no items";
-          Object.assign(this[Private], {title, header, items});
-          this._render();
-        }
-
-        _render() {
-          // 의사 코드 작성하기
-          // 부모, 데이터 체크
-          const fields = this[Private], parent = document.querySelector(fields.parent);
-          if (!parent) throw "invalid parent";
-          if (!fields.items || !fields.items.length) {
-            parent.innerHTML = "no data";
-            return;
-          } else {
-            parent.innerHTML = "";
-          }
-          // table생성
-          const table = document.createElement('table');
-          // 캡션을 title로
-          const caption = document.createElement('caption');
-          caption.innerHTML = fields.title;
-          table.appendChild(caption);
-          // header를 thdead로
-          table.appendChild(
-            fields.header.reduce((thead, data) => {
-              const th = document.createElement('th');
-              th.innerHTML = data;
-              thead.appendChild(th);
-              return thead;
-            }, document.createElement('thead'))
-          );
-          // items를 tr로
-          // 부모에 table 삽입
-          parent.appendChild(
-            fields.items.reduce( (table, row)=> {
-              table.appendChild(
-                row.reduce( (tr, data)=> {
-                  const td = document.createElement('td');
-                  td.innerHTML = data;
-                  tr.appendChild(td);
-                  return tr;
-                }, document.createElement('tr'))
-              );
-              return table;
-            }, table)
-          );
-        }
-      };
-    })();
-    const table = new Table("#data");
-    table.load("data.json");
+    const data = new JsonData('./data.json');
+    const draw = new TableRenderer("#data");
+    draw.render(data);
   </script>
 </body>
 </html>
