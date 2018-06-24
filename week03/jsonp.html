@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jsonp: cross domain을 신경 안써도 된다.</title>
+</head>
+<body>
+  <p>head 에 스크립트 삽입하는 방법</p>
+  <script>
+    function a(data) {
+      console.log(data);
+    }  
+  </script>
+  <!--
+  <script src="http://naver.com/a.js?callback=a"></script>
+  -->
+  <script>
+    var s = doc.createElement('script');
+    doc.head.appendChild(s);
+    s.src = '...';
+    a({meta:{}, data:{contents:{}}}); // callback
+    {meta:{}, data:{contents:{}}}     // callback이 없을경우
+  </script>
+</body>
+</html>
